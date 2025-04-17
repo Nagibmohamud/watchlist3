@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add a Show</title>
+    <link
+      rel="stylesheet"
+      th:href="@{/css/bootstrap.min.css}"
+      href="/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="bg-light">
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/watchlist">Watchlist</a>
+
+        <div class="d-flex ms-auto align-items-center">
+          <span
+            class="navbar-text me-3 fw-bold"
+            sec:authentication="name"
+          ></span>
+          <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-danger btn-sm fw-bold">
+              Sign Out
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <h1 class="mb-4">Add a New Show</h1>
+
+      <form action="/addShow" method="post">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+        <div class="mb-3">
+          <label for="title" class="form-label">Title:</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="category" class="form-label">Category:</label>
+          <select id="category" name="category" class="form-select" required>
+            <option value="Anime">Anime</option>
+            <option value="TV Show">TV Show</option>
+            <option value="Movie">Movie</option>
+            <option value="Unknown">Something else</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col">
+            <label for="episodesWatched" class="form-label"
+              >Episodes Watched:</label
+            >
+            <input
+              type="number"
+              id="episodesWatched"
+              name="episodesWatched"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="col">
+            <label for="totalEpisodes" class="form-label"
+              >Total Episodes:</label
+            >
+            <input
+              type="number"
+              id="totalEpisodes"
+              name="totalEpisodes"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="status" class="form-label">Status:</label>
+          <select id="status" name="status" class="form-select">
+            <option value="Plan to Watch">Plan to Watch</option>
+            <option value="Watching">Watching</option>
+            <option value="Completed">Completed</option>
+            <option value="On Hold">On Hold</option>
+            <option value="Dropped">Dropped</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Show</button>
+        <a href="/watchlist" class="btn btn-secondary ms-2"
+          >Back to Watchlist</a
+        >
+      </form>
+    </div>
+  </body>
+</html>

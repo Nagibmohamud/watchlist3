@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your Watchlist</title>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/css/bootstrap.min.css"
+      th:href="@{/css/bootstrap.min.css}"
+      class="table table-striped"
+    />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/watchlist">Watchlist</a>
+
+        <div class="d-flex ms-auto align-items-center">
+          <span
+            class="navbar-text me-3 fw-bold"
+            sec:authentication="name"
+          ></span>
+          <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-danger btn-sm fw-bold">
+              Sign Out
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Episodes</th>
+          <th>Status</th>
+          <th>Rating (1-10)</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="show : ${shows}">
+          <td th:text="${show.title}" style="font-weight: bold">Title</td>
+          <td th:text="${show.category}">Category</td>
+          <td
+            th:text="${show.episodesWatched + '/' + show.totalEpisodes}"
+            style="font-weight: bold"
+          >
+            Episodes
+          </td>
+
+          <td th:text="${show.status}">Status</td>
+          <td
+            th:text="${show.rating != null ? show.rating.score : 'Not rated'}"
+            style="font-weight: bold"
+          >
+            Rating
+          </td>
+          <td
+            th:text="${show.rating != null ? show.rating.comment : 'No comment'}"
+          >
+            Comment
+          </td>
+          <td>
+            <a
+              th:href="@{'/rateShow/' + ${show.id}}"
+              class="btn btn-sm btn-warning"
+              >Rate</a
+            >
+          </td>
+          '
+
+          <td>
+            <a th:href="@{/editShow/{id}(id=${show.id})}" class="btn btn-info"
+              >Edit</a
+            >
+          </td>
+          <td sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <a
+              th:href="@{/deleteShow/{id}(id=${show.id})}"
+              class="btn btn-danger"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="/addShow" class="btn btn-success">Add New Show</a>
+  </body>
+</html>

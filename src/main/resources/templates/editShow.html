@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Watchlist</title>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/css/bootstrap.min.css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/watchlist">Watchlist</a>
+
+        <div class="d-flex ms-auto align-items-center">
+          <span
+            class="navbar-text me-3 fw-bold"
+            sec:authentication="name"
+          ></span>
+          <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-danger btn-sm fw-bold">
+              Sign Out
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <h1>Watch list</h1>
+
+    <table class="table table-striped"></table>
+
+    <form th:action="@{/editShow}" th:object="${show}" method="post">
+      <input type="hidden" th:field="*{id}" />
+
+      <label for="title">Title:</label>
+      <input type="text" th:field="*{title}" required />
+
+      <label for="category">Category:</label>
+      <select th:field="*{category}" required>
+        <option value="Anime">Anime</option>
+        <option value="TV Show">TV Show</option>
+        <option value="Movie">Movie</option>
+        <option value="Unknown">Something else</option>
+      </select>
+
+      <label for="episodesWatched">Episodes Watched:</label>
+      <input type="number" th:field="*{episodesWatched}" required />
+
+      <label for="totalEpisodes">Total Episodes:</label>
+      <input type="number" th:field="*{totalEpisodes}" required />
+
+      <label for="status">Status:</label>
+      <select th:field="*{status}">
+        <option value="Plan to Watch">Plan to Watch</option>
+        <option value="Watching">Watching</option>
+        <option value="Completed">Completed</option>
+        <option value="On Hold">On Hold</option>
+        <option value="Dropped">Dropped</option>
+      </select>
+
+      <button type="submit" class="btn btn-success">Save</button>
+    </form>
+
+    <a href="/watchlist" class="btn btn-danger">Cancel</a>
+  </body>
+</html>
