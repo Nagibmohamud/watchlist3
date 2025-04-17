@@ -54,9 +54,4 @@ public class ShowRestController {
         showRepository.deleteById(id);
     }
 
-    @GetMapping("/user/{userId}")
-    public List<Show> getShowByUser(@PathVariable Long userId) {
-        return showRepository.findByUserIdOrderByDateAddedDesc(userId);
-    }
-
 }
