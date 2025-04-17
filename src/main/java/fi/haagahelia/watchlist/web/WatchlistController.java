@@ -32,7 +32,7 @@ public class WatchlistController {
 
     @GetMapping("/watchlist")
     public String showWatchlist(Model model) {
-        model.addAttribute("shows", showrepository.findAll()); //Homepage, gets all shows from the repository
+        model.addAttribute("shows", showrepository.findAllByOrderByDateAddedDesc());//Homepage, gets all shows from the repository
         return "watchlist";
     }
 

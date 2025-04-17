@@ -8,4 +8,6 @@ public interface ShowRepository extends CrudRepository<Show, Long> {
 
     List<Show> findByUserIdOrderByDateAddedDesc(Long userId);
 
+    List<Show> findAllByOrderByDateAddedDesc();
+
 }

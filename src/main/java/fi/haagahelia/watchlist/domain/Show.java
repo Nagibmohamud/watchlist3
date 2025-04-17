@@ -73,6 +73,10 @@ public class Show {
         return rating;
     }
 
+    public LocalDateTime getDateAdded() {
+        return dateAdded;
+    }
+
     // Setters
     public void setEpisodesWatched(int episodesWatched) {
         this.episodesWatched = episodesWatched;
@@ -100,5 +104,9 @@ public class Show {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    public void setDateAdded(LocalDateTime dateAdded) {
+        this.dateAdded = dateAdded;
     }
 }
