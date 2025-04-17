@@ -14,7 +14,7 @@ import jakarta.persistence.PrePersist;
 public class Show {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
