@@ -1,11 +1,14 @@
 package fi.haagahelia.watchlist.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Show {
@@ -19,6 +22,12 @@ public class Show {
     private int episodesWatched;
     private int totalEpisodes;
     private String status; // "Watching", "Completed", etc.
+    private LocalDateTime dateAdded;
+
+    @PrePersist
+    protected void onCreate() {
+        dateAdded = LocalDateTime.now();
+    }
 
     @OneToOne(mappedBy = "show", cascade = CascadeType.ALL)
     private Rating rating;

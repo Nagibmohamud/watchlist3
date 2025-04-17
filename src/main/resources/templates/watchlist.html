@@ -76,7 +76,11 @@
               >Rate</a
             >
           </td>
-          '
+          <td
+            th:text="${#temporals.format(show.dateAdded, 'dd.MM.yyyy HH:mm')}"
+          >
+            Added
+          </td>
 
           <td>
             <a th:href="@{/editShow/{id}(id=${show.id})}" class="btn btn-info"

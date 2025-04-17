@@ -53,4 +53,14 @@ public class ShowRestController {
     public void deleteShow(@PathVariable Long id) {
         showRepository.deleteById(id);
     }
+
+    @GetMapping("/{userId}")
+    public List<Show> getShowByUser(@PathVariable Long userId) {
+        return showRepository.findByUserIdOrderByDateAddedDesc(userId);
+    }
+
+    @PostMapping
+    public Show addToShow(@RequestBody Show newEntry) {
+        return showRepository.save(newEntry);
+    }
 }
