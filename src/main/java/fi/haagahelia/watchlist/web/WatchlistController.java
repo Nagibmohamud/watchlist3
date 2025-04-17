@@ -62,13 +62,9 @@ public class WatchlistController {
 
     @PostMapping("/editShow")
     public String updateShow(Show show) {
-        Show dateShow = showrepository.findById(show.getId()).orElse(null);
-
-        if (dateShow != null) {
-            show.setDateAdded(dateShow.getDateAdded()); // Preserve the original date
-            showrepository.save(show);
-
-        }
+        show.setDateAdded(
+                java.time.LocalDateTime.now());
+        showrepository.save(show);
         return "redirect:/watchlist";
     }
 
