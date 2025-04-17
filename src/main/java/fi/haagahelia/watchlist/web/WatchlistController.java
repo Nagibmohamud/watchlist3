@@ -62,12 +62,19 @@ public class WatchlistController {
 
     @PostMapping("/editShow")
     public String updateShow(Show show) {
-        showrepository.save(show);
+        Show dateShow = showrepository.findById(show.getId()).orElse(null);
+
+        if (dateShow != null) {
+            show.setDateAdded(dateShow.getDateAdded()); // Preserve the original date
+            showrepository.save(show);
+
+        }
         return "redirect:/watchlist";
     }
 
     @GetMapping("/rateShow/{id}")
-    public String showRateForm(@PathVariable Long id, Model model) {
+    public String showRateForm(@PathVariable Long id, Model model
+    ) {
         Show show = showrepository.findById(id).orElse(null);
         model.addAttribute("show", show);
         return "rateShow";
@@ -76,7 +83,8 @@ public class WatchlistController {
     @PostMapping("/rateShow/{id}")
     public String submitRating(@PathVariable("id") Long showId,
             @RequestParam int score,
-            @RequestParam String comment) {
+            @RequestParam String comment
+    ) {
 
         Show show = showrepository.findById(showId).orElseThrow();
 
