@@ -36,12 +36,13 @@ public class Show {
 
     }
 
-    public Show(String title, String category, int totalEpisodes) {
+    public Show(String title, String category, int totalEpisodes, LocalDateTime dateAdded) {
         this.title = title;
         this.category = category;
         this.totalEpisodes = totalEpisodes;
         this.episodesWatched = 0;
         this.status = "Plan to Watch";
+        this.dateAdded = dateAdded;
     }
 
     // Getters

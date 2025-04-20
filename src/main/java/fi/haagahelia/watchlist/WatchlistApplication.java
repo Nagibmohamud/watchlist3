@@ -1,5 +1,7 @@
 package fi.haagahelia.watchlist;
 
+import java.time.LocalDateTime;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,15 +26,15 @@ public class WatchlistApplication {
             AccountRepository userRepository) {
         return (args) -> {
             // Test data Shows
-            Show show1 = new Show("Naruto", "Anime", 220);
+            Show show1 = new Show("Naruto", "Anime", 220, LocalDateTime.now());
             show1.setEpisodesWatched(100);
             show1.setStatus("Watching");
 
-            Show show2 = new Show("Breaking Bad", "TV Show", 62);
+            Show show2 = new Show("Breaking Bad", "TV Show", 62, LocalDateTime.now());
             show2.setEpisodesWatched(62);
             show2.setStatus("Completed");
 
-            Show show3 = new Show("The Avengers", "Movie", 1);
+            Show show3 = new Show("The Avengers", "Movie", 1, LocalDateTime.now());
             show3.setStatus("Completed");
 
             // Saves the test data into the repository
